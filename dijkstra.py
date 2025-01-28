@@ -12,6 +12,5 @@ def Dijkstra(s0, sg, T):
         current_node, cost = heapq.heappop(open)
         if current_node == sg:
             return cost
-        for next_node in T.successors(current_node):
 
 
