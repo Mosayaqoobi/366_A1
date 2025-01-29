@@ -61,7 +61,7 @@ def main():
         goal = goal_states[i]
     
         time_start = time.time()
-        path, cost, expanded_diskstra = None, None, None # Replace the None, None, None with a call to Dijkstra's algorithm
+        path, cost, expanded_diskstra = dijkstra.run(start, goal) # Replace the None, None, None with a call to Dijkstra's algorithm
         time_end = time.time()
         nodes_expanded_dijkstra.append(expanded_diskstra)
         time_dijkstra.append(time_end - time_start)
@@ -80,7 +80,7 @@ def main():
         goal = goal_states[i]
     
         time_start = time.time()
-        path, cost, expanded_astar = None, None, None # Replace the None, None, None with a call to A*
+        path, cost, expanded_astar = astar.run(start, goal) # Replace the None, None, None with a call to A*
         time_end = time.time()
 
         nodes_expanded_astar.append(expanded_astar)
@@ -96,8 +96,8 @@ def main():
             print("Is the path correct?", verified_path)
             print()
 
-        gridded_map.plot_map(dijkstra.get_closed_data(), start, goal, 'solution-maps/dijkstra_' + str(i + 1))
-        gridded_map.plot_map(astar.get_closed_data(), start, goal, 'solution-maps/astar_' + str(i + 1))
+        #gridded_map.plot_map(dijkstra.get_closed(), start, goal, 'solution-maps/dijkstra_' + str(i + 1))
+        #gridded_map.plot_map(astar.get_closed(), start, goal, 'solution-maps/astar_' + str(i + 1))
 
 
     from search.plot_results import PlotResults
