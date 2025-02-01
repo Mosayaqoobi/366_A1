@@ -161,11 +161,11 @@ class Dijkstra:
         #start the start state
         start.set_g(0.0)
         start.set_cost(start.get_g())  # dijkstra uses g-value
-        heapq.heappush(self.open, (start.get_cost(), start))
+        heapq.heappush(self.open, start)
         best_g[start.state_hash()] = 0.0
 
         while self.open:
-            __, cur = heapq.heappop(self.open)  #pop with the least cost
+            cur = heapq.heappop(self.open)  #pop with the least cost
 
             
             if cur.state_hash() in self.closed:   #check if in closed already
@@ -190,7 +190,7 @@ class Dijkstra:
                 #if not in closed, and either not seen yet or found better gvalue
                 if s_hash not in self.closed and (s_hash not in best_g or s.get_g() < best_g[s_hash]):
                     best_g[s_hash] = s.get_g()  #update the best gvalue
-                    heapq.heappush(self.open, (s.get_cost(), s))    #push the state to open list
+                    heapq.heappush(self.open, s)    #push the state to open list
 
         #if no path was found
         return None, -1, self.get_count()
@@ -261,11 +261,11 @@ class AStar:
         start.set_g(0.0)
         h_start = self.octile_distance(start, goal)
         start.set_cost(start.get_g() + h_start)
-        heapq.heappush(self.open, (start.get_cost(), start))
+        heapq.heappush(self.open, start)
         best_g[start.state_hash()] = 0.0
 
         while self.open:
-            __, cur = heapq.heappop(self.open)
+            cur = heapq.heappop(self.open)
 
             if cur.state_hash() in self.closed:   #check if in closed already
                 continue
@@ -289,7 +289,7 @@ class AStar:
                 
                 if s_hash not in self.closed and (s_hash not in best_g or s.get_g() < best_g[s_hash]):  #if not in closed, and either not seen yet or found better gvalue
                     best_g[s_hash] = s.get_g()  #update the best gvalue
-                    heapq.heappush(self.open, (s.get_cost(), s))    
+                    heapq.heappush(self.open, s)   
 
         #if no path was found
         return None, -1, self.get_count()
