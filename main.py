@@ -3,6 +3,7 @@ from search.algorithms import Dijkstra, AStar, State
 from search.map import Map
 import getopt
 import sys
+import os
 
 def verify_path(start, goal, path, map):
     if path is None:
@@ -95,9 +96,10 @@ def main():
             print("Solution cost expected: ", solution_costs[i])
             print("Is the path correct?", verified_path)
             print()
+        os.makedirs('solution-maps', exist_ok=True)
 
-        #gridded_map.plot_map(dijkstra.get_closed(), start, goal, 'solution-maps/dijkstra_' + str(i + 1))
-        #gridded_map.plot_map(astar.get_closed(), start, goal, 'solution-maps/astar_' + str(i + 1))
+        gridded_map.plot_map(dijkstra.get_closed(), start, goal, 'solution-maps/dijkstra_' + str(i + 1))
+        gridded_map.plot_map(astar.get_closed(), start, goal, 'solution-maps/astar_' + str(i + 1))
 
 
     from search.plot_results import PlotResults
